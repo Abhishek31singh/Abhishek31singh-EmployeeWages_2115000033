@@ -1,4 +1,4 @@
-//checking 
+//UC-1 checking 
 const present = 1;
 
 let isPresent = Math.floor(Math.random()*10)%2;
@@ -11,7 +11,7 @@ else{
     return;
 }
 
-//calculating dailywage of an employee with using a function
+//UC-2 and UC-3 calculating dailywage of an employee with using a function
 let workingHours = Math.floor(Math.random()*10)%3;
 
 const isPartTime = 1;
@@ -39,7 +39,7 @@ let wage = wagePerHour*getWorkingHours(workingHours);
 
 console.log("Daily wage generated for employee is ",wage);
 
-//calcultating wages for a Month
+//UC-4 calcultating wages for a Month
 
 const numberOfWorkingDays = 20;
 
@@ -54,7 +54,7 @@ let empWage = empHrs*wagePerHour;
 console.log("Monthly Wage of the Employee for hours "+empHrs+" is "+empWage);
 
 
-//calculating Employee wage Untill hours are 160 or days completed are 20 
+//UC-5 calculating Employee wage Untill hours are 160 or days completed are 20 
 
 empHrs = 0;
 let numberOfTotalDays = 0;
@@ -69,7 +69,8 @@ empWage = empHrs*wagePerHour;
 
 console.log("Total working days are : "+numberOfTotalDays+", Total working hours are : "+empHrs+", Wage of Employee is : "+empWage);
 
-//=====================uc6 store in array======================
+//UC-6 storing the daily wage in an array and also calculating totalWage
+
 function getWage(empHrs){
     return empHrs*wagePerHour;
 }
@@ -98,7 +99,6 @@ while(totalEmpHrs <= maxWorkingHrs && numberOfTotalDays < maxWorkingDays){
 
 empWage = totalEmpHrs*wagePerHour;
 console.log("Total working days are : "+numberOfTotalDays+", Total working hours are : "+totalEmpHrs+", Wage of Employee is : "+empWage);
-
 
 //UC-7A calculate total wage using array forEach traversal  
 
@@ -165,3 +165,31 @@ function totalDaysWorked(numOfDays, wage){
 }
 
 console.log("Number of days worked by the employee are "+dailyWages.reduce(totalDaysWorked,0));
+
+
+//UC-8 storing the day and daily wage along with the total wage in map
+
+dailyWages = new Array();
+let empDailyWageMap = new Map();
+
+totalEmpHrs = 0;
+numberOfTotalDays = 0;
+
+while(totalEmpHrs <= maxWorkingHrs && numberOfTotalDays < maxWorkingDays){
+    
+    empCheck = Math.floor(Math.random()*10)%3;
+    empHrs = getWorkingHours(empCheck);
+
+    totalEmpHrs += empHrs;
+
+    dailyWages.push(getWage(empHrs));
+
+    numberOfTotalDays++;
+
+    empDailyWageMap.set(numberOfTotalDays, getWage(empHrs));
+
+}
+
+console.log(empDailyWageMap);
+
+console.log("Emp wage map total wage : "+Array.from(empDailyWageMap.values()).reduce((totalWage, wage)=> totalWage+wage, 0));
